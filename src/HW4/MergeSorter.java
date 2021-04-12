@@ -14,7 +14,7 @@ public class MergeSorter extends Sorter {
     }
 
     // Recursive function to sort an array of integers.
-    void mergeSort(double[] doubleArray) {
+    private void mergeSort(double[] doubleArray) {
         double[] partLeft, partRight;
 
         if (doubleArray.length < 2) return; // base condition. If the array has less than two element, do nothing.
@@ -38,7 +38,7 @@ public class MergeSorter extends Sorter {
         merge(doubleArray, partLeft, partRight);  // Merging partLeft and partRight into doubleArray as sorted list.
     }
 
-    void merge(double[] doubleArray, double[] partLeft, double[] partRight) {
+    private void merge(double[] doubleArray, double[] partLeft, double[] partRight) {
         int i,j,k;
 
         // i - to mark the index of left sub-array (L)

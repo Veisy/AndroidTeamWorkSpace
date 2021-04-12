@@ -15,7 +15,7 @@ public class SorterMain {
         boolean repeatMain = true;
         while (repeatMain) {
 
-            System.out.println("Please select the operation you want to do:\n" +
+            System.out.println("\nPlease select the operation you want to do:\n" +
                     "1-)Insertion Sort\n" +
                     "2-)Merge Sort\n" +
                     "3-)Exit");
