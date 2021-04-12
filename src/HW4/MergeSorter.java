@@ -19,7 +19,7 @@ public class MergeSorter extends Sorter {
 
         if (doubleArray.length < 2) return; // base condition. If the array has less than two element, do nothing.
 
-        int midPoint, i;
+        int midPoint;
 
         midPoint = doubleArray.length / 2;  // find the mid index.
         // create left and right sub arrays
@@ -28,10 +28,11 @@ public class MergeSorter extends Sorter {
         partLeft = new double[midPoint];
         partRight = new double[doubleArray.length - midPoint];
 
-        for(i = 0; i < midPoint; i++)
-            partLeft[i] = doubleArray[i]; // creating left sub array
-        for(i = midPoint; i < doubleArray.length; i++)
-            partRight[i - midPoint] = doubleArray[i]; // creating right sub array
+        // creating left sub array
+        System.arraycopy(doubleArray, 0, partLeft, 0, midPoint);
+        // creating right sub array
+        if (doubleArray.length - midPoint >= 0)
+            System.arraycopy(doubleArray, midPoint, partRight, 0, doubleArray.length - midPoint);
 
         mergeSort(partLeft);  // sorting the left sub array
         mergeSort(partRight);  // sorting the right sub array
