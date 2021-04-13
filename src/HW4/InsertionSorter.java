@@ -16,8 +16,8 @@ public class InsertionSorter extends Sorter {
             j = i;
 
             while ( j > 0 &&  doubleArray[j - 1] > doubleArray[j] ){
-                tempValue          = doubleArray[j];
-			    doubleArray[j]     = doubleArray[j - 1] ;
+                tempValue = doubleArray[j];
+			    doubleArray[j] = doubleArray[j - 1] ;
         	    doubleArray[j - 1] = tempValue;
                 j--;
             }

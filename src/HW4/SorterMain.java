@@ -76,6 +76,7 @@ public class SorterMain {
                     }
 
                     double[] doubleArray = convertToArray(list);
+                    list.clear();
 
                     Sorter sorter;
 
@@ -87,14 +88,11 @@ public class SorterMain {
 
                     sorter.sort();
 
-                    list.clear();
-
                     if (doubleArray.length > PRINT_LIMIT) {
                         System.out.println(Arrays.toString(sorter.list));
                     } else {
                         CheckerBoardDecorator.checkerBoard(sorter.list);
                     }
-
 
                 }  else {
                     System.out.println("Please enter the value between 1-4.");
