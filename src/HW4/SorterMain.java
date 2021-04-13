@@ -4,6 +4,7 @@ import HW4.decoration.CheckerBoardDecorator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class SorterMain {
@@ -18,14 +19,41 @@ public class SorterMain {
             System.out.println("\nPlease select the operation you want to do:\n" +
                     "1-)Insertion Sort\n" +
                     "2-)Merge Sort\n" +
-                    "3-)Exit");
+                    "3-)Comparison Test\n" +
+                    "4-)Exit");
 
             String operation = scan.nextLine();
 
             // Initially check if user wants to quit.
-            if (operation.equals("3")) {
+            if (operation.equals("4")) {
 
                 repeatMain = false;
+
+            } else if (operation.equals("3")) {
+
+                System.out.println("Enter the array size: ");
+                int arraySize = checkInt();
+                System.out.println("Max value: ");
+                int maxLimit = checkInt();
+
+                double[] firstArray = createRandomArray(arraySize, maxLimit);
+                double[] secondArray = firstArray.clone();
+
+                Sorter mergeSorter = new MergeSorter(firstArray);
+                Sorter insertionSorter = new InsertionSorter(secondArray);
+
+                final long mergeStartTime = System.nanoTime();
+                mergeSorter.sort();
+                final long mergeEndTime = System.nanoTime();
+                System.out.println(arraySize + " numbers from 0 to " + maxLimit + " are sorted.");
+                System.out.println("Merge sort execution time: "
+                        + ((double) (mergeEndTime - mergeStartTime) / 1000000000));
+
+                final long insertionStartTime = System.nanoTime();
+                insertionSorter.sort();
+                final long insertionEndTime = System.nanoTime();
+                System.out.println("Insertion sort execution time: "
+                        + ((double) (insertionEndTime - insertionStartTime) / 1000000000));
 
             } else {
 
@@ -62,30 +90,56 @@ public class SorterMain {
                     list.clear();
 
                     if (doubleArray.length > PRINT_LIMIT) {
-                        System.out.println(Arrays.toString(doubleArray));
+                        System.out.println(Arrays.toString(sorter.list));
                     } else {
-                        CheckerBoardDecorator.checkerBoard(doubleArray);
+                        CheckerBoardDecorator.checkerBoard(sorter.list);
                     }
 
 
                 }  else {
-                    System.out.println("Please enter the value between 1-3.");
+                    System.out.println("Please enter the value between 1-4.");
                 }
             }
         }
     }
 
+    private static double[] createRandomArray(int arraySize, int maxLimit) {
+        double[] randomArray = new double[arraySize];
+        Random rand = new Random();
+
+        for (int i = 0; i < randomArray.length; i++) {
+            randomArray[i] = rand.nextDouble() * maxLimit;
+        }
+
+        return randomArray;
+    }
+
+    private static Integer checkInt() {
+        return Integer.parseInt(checkNumber(1));
+    }
+
     private static String checkDouble() {
+       return checkNumber(2);
+    }
+
+    private static String checkNumber(int inputType) {
         String inputString = scan.nextLine();
         while (true) {
             try {
                 if (inputString.equals("q")) {
                     break;
                 }
-                Double.parseDouble(inputString);
+
+                if (inputType == 1) {
+                    Integer.parseInt(inputString);
+                } else {
+                    Double.parseDouble(inputString);
+                }
                 break;
             } catch (Exception e) {
-                System.out.println("Please enter a double number.");
+
+                System.out.println("Please enter a valid number.");
+
                 inputString = scan.nextLine();
             }
         }
