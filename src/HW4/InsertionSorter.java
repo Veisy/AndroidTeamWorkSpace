@@ -23,4 +23,9 @@ public class InsertionSorter extends Sorter {
             }
         }
     }
+
+    @Override
+    public String getAlgorithmName() {
+        return "Insertion";
+    }
 }

@@ -19,45 +19,48 @@ public class SorterMain {
             System.out.println("\nPlease select the operation you want to do:\n" +
                     "1-)Insertion Sort\n" +
                     "2-)Merge Sort\n" +
-                    "3-)Comparison Test\n" +
-                    "4-)Exit");
+                    "3-)Quick Sort\n" +
+                    "4-)Comparison Test\n" +
+                    "5-)Exit");
 
             String operation = scan.nextLine();
 
             // Initially check if user wants to quit.
-            if (operation.equals("4")) {
+            if (operation.equals("5")) {
 
                 repeatMain = false;
 
-            } else if (operation.equals("3")) {
+            } else if (operation.equals("4")) {
 
-                System.out.println("Enter the array size: ");
-                int arraySize = checkInt();
-                System.out.println("Max value: ");
-                int maxLimit = checkInt();
+                int[] differentArraySizes = {10, 20, 30, 100, 1000, 10000, 100000, 1000000, 10000000};
 
-                double[] firstArray = createRandomArray(arraySize, maxLimit);
-                double[] secondArray = firstArray.clone();
+                for (int arraySize : differentArraySizes) {
 
-                Sorter mergeSorter = new MergeSorter(firstArray);
-                Sorter insertionSorter = new InsertionSorter(secondArray);
+                    // If we use the same random double array for all sorters, we will sort the same random array.
+                    // That means after first sorting (merge sort) we will already have a sorted list to use in other sorter algorithms.
+                    // We need different double[] objects with the same data. We need to clone the object.
+                    // Otherwise we will only copy the reference of the same double[] object.
 
-                final long mergeStartTime = System.nanoTime();
-                mergeSorter.sort();
-                final long mergeEndTime = System.nanoTime();
-                System.out.println(arraySize + " numbers from 0 to " + maxLimit + " are sorted.");
-                System.out.println("Merge sort execution time: "
-                        + ((double) (mergeEndTime - mergeStartTime) / 1000000000));
+                    // We need to use exactly same array to compare different algorithms,
+                    // If we create different random arrays, the execution time did not differ noticeably in this case ,
+                    // but still it would not be a full comparison.
+                    double[] firstArray = createRandomArray(arraySize);
+                    double[] secondArray = firstArray.clone();
+                    double[] thirdArray = firstArray.clone();
 
-                final long insertionStartTime = System.nanoTime();
-                insertionSorter.sort();
-                final long insertionEndTime = System.nanoTime();
-                System.out.println("Insertion sort execution time: "
-                        + ((double) (insertionEndTime - insertionStartTime) / 1000000000));
+                    Sorter mergeSorter = new MergeSorter(firstArray);
+                    Sorter insertionSorter = new InsertionSorter(secondArray);
+                    Sorter quickSorter = new QuickSorter(thirdArray);
+
+                    System.out.println("\n\nArray size: " + arraySize + "\n");
+                    sortAnalyzer(insertionSorter);
+                    sortAnalyzer(mergeSorter);
+                    sortAnalyzer(quickSorter);
+                }
 
             } else {
 
-                if (operation.equals("1") || operation.equals("2")) {
+                if (operation.equals("1") || operation.equals("2") || operation.equals("3")) {
                     System.out.println("\nPlease enter the value you want to sort:\n" +
                             "Press 'q' to sorting.");
 
@@ -82,8 +85,10 @@ public class SorterMain {
 
                     if (operation.equals("1")) {
                         sorter = new InsertionSorter(doubleArray);
-                    } else {
+                    } else if (operation.equals("2")) {
                         sorter = new MergeSorter(doubleArray);
+                    } else {
+                        sorter = new QuickSorter(doubleArray);
                     }
 
                     sorter.sort();
@@ -101,38 +106,40 @@ public class SorterMain {
         }
     }
 
-    private static double[] createRandomArray(int arraySize, int maxLimit) {
+    private static void sortAnalyzer(Sorter sorter) {
+        // If array size is bigger then 10 thousand, we can not use Insertion sort anymore.
+        if( !(sorter.getAlgorithmName().equals("Insertion") && sorter.list.length > 100000) ) {
+            final long startTime = System.nanoTime();
+            sorter.sort();
+            final long endTime = System.nanoTime();
+            System.out.println(sorter.getAlgorithmName() + " sort execution time: "
+                    + ((double) (endTime - startTime) / 1000000000));
+        }
+    }
+
+    private static double[] createRandomArray(int arraySize) {
         double[] randomArray = new double[arraySize];
         Random rand = new Random();
 
         for (int i = 0; i < randomArray.length; i++) {
-            randomArray[i] = rand.nextDouble() * maxLimit;
+            randomArray[i] = rand.nextDouble() * arraySize;
         }
 
         return randomArray;
     }
 
-    private static Integer checkInt() {
-        return Integer.parseInt(checkNumber(1));
-    }
-
     private static String checkDouble() {
-       return checkNumber(2);
+       return checkNumber();
     }
 
-    private static String checkNumber(int inputType) {
+    private static String checkNumber() {
         String inputString = scan.nextLine();
         while (true) {
             try {
                 if (inputString.equals("q")) {
                     break;
                 }
-
-                if (inputType == 1) {
-                    Integer.parseInt(inputString);
-                } else {
-                    Double.parseDouble(inputString);
-                }
+                Double.parseDouble(inputString);
                 break;
             } catch (Exception e) {
 

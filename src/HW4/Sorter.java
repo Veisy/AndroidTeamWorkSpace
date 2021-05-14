@@ -9,4 +9,5 @@ public abstract class Sorter {
     }
 
     public abstract void sort();
+    public abstract String getAlgorithmName();
 }

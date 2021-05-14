@@ -13,6 +13,11 @@ public class MergeSorter extends Sorter {
         mergeSort(doubleArray);
     }
 
+    @Override
+    public String getAlgorithmName() {
+        return "Merge";
+    }
+
     // Recursive function to sort an array of integers.
     private void mergeSort(double[] doubleArray) {
         double[] partLeft, partRight;
@@ -57,6 +62,4 @@ public class MergeSorter extends Sorter {
         while(j < partRight.length)
             doubleArray[k++] = partRight[j++];
     }
-
-
 }
