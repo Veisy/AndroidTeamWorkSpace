@@ -2,7 +2,7 @@ package HW4;
 
 public class MergeSorter extends Sorter {
 
-    public MergeSorter(double[] list) {
+    public MergeSorter(final double[] list) {
         super(list);
     }
 

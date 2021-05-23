@@ -2,7 +2,7 @@ package HW4;
 
 public class QuickSorter extends Sorter{
 
-    public QuickSorter(double[] list) {
+    public QuickSorter(final double[] list) {
         super(list);
     }
 

@@ -2,7 +2,7 @@ package HW4;
 
 public class InsertionSorter extends Sorter {
 
-    public InsertionSorter(double[] list) {
+    public InsertionSorter(final double[] list) {
         super(list);
     }
 

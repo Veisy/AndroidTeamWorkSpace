@@ -4,7 +4,7 @@ public abstract class Sorter {
 
     private final double[] list;
 
-    public Sorter(double[] list) {
+    public Sorter(final double[] list) {
         this.list = list;
     }
 
