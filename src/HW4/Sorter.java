@@ -2,7 +2,7 @@ package HW4;
 
 public abstract class Sorter {
 
-    double[] list;
+    private final double[] list;
 
     public Sorter(double[] list) {
         this.list = list;
@@ -10,4 +10,8 @@ public abstract class Sorter {
 
     public abstract void sort();
     public abstract String getAlgorithmName();
+
+    public double[] getList() {
+        return list;
+    }
 }

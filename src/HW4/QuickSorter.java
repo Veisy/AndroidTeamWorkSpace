@@ -8,7 +8,7 @@ public class QuickSorter extends Sorter{
 
     @Override
     public void sort() {
-        double[] list = super.list;
+        double[] list = super.getList();
 
         int startingLow = 0;
         int startingHigh = list.length - 1;

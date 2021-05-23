@@ -8,7 +8,7 @@ public class InsertionSorter extends Sorter {
 
     @Override
     public void sort() {
-        double[] doubleArray = super.list;
+        double[] doubleArray = super.getList();
 
         double tempValue;
 

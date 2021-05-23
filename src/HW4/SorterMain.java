@@ -94,9 +94,9 @@ public class SorterMain {
                     sorter.sort();
 
                     if (doubleArray.length > PRINT_LIMIT) {
-                        System.out.println(Arrays.toString(sorter.list));
+                        System.out.println(Arrays.toString(sorter.getList()));
                     } else {
-                        CheckerBoardDecorator.checkerBoard(sorter.list);
+                        CheckerBoardDecorator.checkerBoard(sorter.getList());
                     }
 
                 }  else {
@@ -108,7 +108,7 @@ public class SorterMain {
 
     private static void sortAnalyzer(Sorter sorter) {
         // If array size is bigger then 10 thousand, we can not use Insertion sort anymore.
-        if( !(sorter.getAlgorithmName().equals("Insertion") && sorter.list.length > 100000) ) {
+        if( !(sorter.getAlgorithmName().equals("Insertion") && sorter.getList().length > 100000) ) {
             final long startTime = System.nanoTime();
             sorter.sort();
             final long endTime = System.nanoTime();

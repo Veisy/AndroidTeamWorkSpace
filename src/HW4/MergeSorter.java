@@ -8,7 +8,7 @@ public class MergeSorter extends Sorter {
 
     @Override
     public void sort() {
-        double[] doubleArray = super.list;
+        double[] doubleArray = super.getList();
 
         mergeSort(doubleArray);
     }
