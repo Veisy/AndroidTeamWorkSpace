@@ -8,10 +8,12 @@ fun main() {
             arrayOf("Ahmet", "Selim", "Hakan"))
 
     // TODO: Why this 'repeat' variable is declared with 'var' instead of 'val'?
+    // TODO: You wont use 'while' loop in your exercise, only 'for' loop to iterate all questions.
     var repeat = true
     while (repeat) {
 
-        println(question1.question)
+        println("\nTo quit, press Q\n")
+        println("\t\t\t ${question1.question}")
         question1.printOptions()
 
         val answer = readLine()
@@ -25,8 +27,9 @@ fun main() {
                 repeat = false
                 "Program terminated. See you later."
             } else if (
-                answer == question1.correctAnswer ||
-                answer == (question1.options.indexOf(question1.correctAnswer) + 1).toString()) {
+            // TODO: What is this 'ignoreCase' doing?
+                    answer.equals(question1.correctAnswer, ignoreCase = true) ||
+                    answer == (question1.options.indexOf(question1.correctAnswer) + 1).toString()) {
                 "That is true."
             } else {
                 "Ohh, wrong answer!"
