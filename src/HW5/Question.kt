@@ -18,7 +18,7 @@ class Question(
 
     fun printOptions() {
         for(index in options.indices) {
-            println("${index + 1} -> ${options[index]}")
+            println("${index + 1}) ${options[index]}")
         }
     }
 }
