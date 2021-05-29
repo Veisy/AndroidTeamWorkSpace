@@ -7,26 +7,34 @@ fun main() {
             "Yusuf",
             arrayOf("Ahmet", "Selim", "Hakan"))
 
-    println(question1.question)
-    question1.printOptions()
+    // TODO: Why this 'repeat' variable is declared with 'var' instead of 'val'?
+    var repeat = true
+    while (repeat) {
 
-    val answer = readLine()
+        println(question1.question)
+        question1.printOptions()
 
-    if (!answer.isNullOrEmpty()) {
+        val answer = readLine()
 
-        // TODO: Pay attention to this point. We can use the if statement as an expression.
-        // TODO: We can use everything as expressions in Kotlin.
-        // User can enter answer as choice number or actual String.
-        val message = if (
+        if (!answer.isNullOrEmpty()) {
+
+            // TODO: Pay attention to this point. We can use the if statement as an expression.
+            // TODO: We can use everything as expressions in Kotlin.
+            // User can enter answer as choice number or actual String.
+            val message = if (answer == "q" || answer == "Q") {
+                repeat = false
+                "Program terminated. See you later."
+            } else if (
                 answer == question1.correctAnswer ||
-                answer == (question1.options.indexOf(question1.correctAnswer) + 1).toString()
-        ) {
-            "That is true."
-        } else {
-            "Ohh, wrong answer!"
-        }
+                answer == (question1.options.indexOf(question1.correctAnswer) + 1).toString()) {
+                "That is true."
+            } else {
+                "Ohh, wrong answer!"
+            }
+            // TODO: Mind using 'when' instead of 'if' in Kotlin. After this exercise we will always use 'when'.
 
-        println(message)
+            println(message)
+        }
     }
 }
 
