@@ -32,7 +32,7 @@ public class SorterMain {
 
             } else if (operation.equals("4")) {
 
-                int[] differentArraySizes = {10, 20, 30, 100, 1000, 10000, 100000, 1000000, 10000000};
+                int[] differentArraySizes = {10, 20, 30, 100, 1000, 2000, 4000, 6000, 8000, 10000, 100000, 1000000, 10000000};
 
                 for (int arraySize : differentArraySizes) {
 
@@ -47,6 +47,7 @@ public class SorterMain {
                     double[] firstArray = createRandomArray(arraySize);
                     double[] secondArray = firstArray.clone();
                     double[] thirdArray = firstArray.clone();
+
 
                     Sorter mergeSorter = new MergeSorter(firstArray);
                     Sorter insertionSorter = new InsertionSorter(secondArray);
